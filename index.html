@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock</title>
+    
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="clock">
+        <div class="circle" id="second" style="--clr: #04fc43"><i></i></div>
+        <div class="circle circle2" id="minute" style="--clr: #fee800">
+          <i></i>
+        </div>
+
+    <div class="circle circle3" id="hour" style="--clr: #e44236">
+          <i></i>
+        </div>
+
+        <span style="--i: 1"><b>1</b></span>
+        <span style="--i: 2"><b>2</b></span>
+        <span style="--i: 3"><b>3</b></span>
+        <span style="--i: 4"><b>4</b></span>
+        <span style="--i: 5"><b>5</b></span>
+        <span style="--i: 6"><b>6</b></span>
+        <span style="--i: 7"><b>7</b></span>
+        <span style="--i: 8"><b>8</b></span>
+        <span style="--i: 9"><b>9</b></span>
+        <span style="--i: 10"><b>10</b></span>
+        <span style="--i: 11"><b>11</b></span>
+        <span style="--i: 12"><b>12</b></span>
+      </div>
+      <div id="date" class="full-date"></div>
+      <div id="time">
+          <div id="digitalClock"></div>
+      </div>
+    </div>
+
+    <div style="position: relative; top: 200px; left: 120px;">
+      <p style="color: yellowgreen; font-size: 2rem">By- Aman Rajput  </p>
+    </div>
+  </div>
+
+  <div style="position: relative; top: 250px; left: 0; right: 100px;">
+      <a href="https://twitter.com/Aman412OP" target="_blank" style="margin-right: 10px">
+        <i class="bi bi-twitter" style="color: white; font-size: 2rem;"></i>
+      </a>
+
+      <a href="https://www.instagram.com/_ashu.hel/" target="_blank" style="margin-right: 10px">
+        <i class="bi bi-instagram" style="color: white; font-size: 2rem;"></i>
+      </a>
+
+      <a href="https://github.com/Aman4122" target="_blank" style="margin-right: 10px">
+        <i class="bi bi-github" style="color: white; font-size: 2rem;"></i>
+        </a>
+   
+    </div>
+    <script>
+      const HOURHAND = document.querySelector("#hour");
+      const MINUTEHAND = document.querySelector("#minute");
+      const SECONDHAND = document.querySelector("#second");
+
+      var date = new Date();
+     
+
+      let hr = date.getHours();
+      let min = date.getMinutes();
+      let sec = date.getSeconds();
+    
+
+      let hrPosition = (hr * 360) / 12 + (min * (360 / 60)) / 12;
+      let minPosition = (min * 360) / 60 + (sec * (360 / 60)) / 60;
+      let secPosition = (sec * 360) / 60;
+
+      function runTheclock() {
+        hrPosition = hrPosition + 3 / 360;
+        minPosition = minPosition + 6 / 60;
+        secPosition = secPosition + 6;
+
+        HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
+        MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
+        SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
+      }
+
+      var interval = setInterval(runTheclock, 1000);
+
+      function showTime() {
+        var date = new Date();
+        var hr = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var session = "AM";
+
+        if (hr == 0) {
+          hr = 12;
+        }
+        if (hr > 12) {
+          hr = hr - 12;
+          session = "PM";
+        }
+
+        hr = hr < 10 ? "0" + hr : hr;
+        min = min < 10 ? "0" + min : min;
+        sec = sec < 10 ? "0" + sec : sec;
+        var time = '<div style="color:#e44236;">' + hr + '</div>' + ":" + '<div style="color:#fee800;">' + min + '</div>' + ":" +'<div style="color:#04fc43;">' + sec + '</div>' + " " + session;
+        document.getElementById("digitalClock").innerText = time;
+        document.getElementById("digitalClock").innerHTML = time;
+
+        setTimeout(showTime, 1000);
+      }
+
+      showTime();
+
+    
+
+    </script>
+  </body>
+</html>
